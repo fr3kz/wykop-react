@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import PostList from '../post/PostList';
 
- class Index extends Component {
+class Index extends Component {
     constructor(){
         super()
         
@@ -17,6 +18,7 @@ import React, { Component } from 'react'
         }
         this.getPosts();
     }
+
     getPosts = () => {
         return fetch("https://wykop-app.herokuapp.com/posts/", {
             method: "GET",
@@ -31,13 +33,12 @@ import React, { Component } from 'react'
             this.setState({posts:data})
         }).catch(err => console.log(err))
     }
+    
     render() {
-        const posts = Array.from(this.state.posts)
+        const posts = this.state.posts
         return (
             <div>
-               {posts.map( (post, id) => 
-               <p>{post.title}</p>
-               )}
+               <PostList posts={posts} />
             </div>
         )
     }
